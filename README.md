@@ -1,29 +1,18 @@
-# Welcome to your Lovable project
+# YatraGenie
 
-This project was built with [Lovable](https://lovable.dev).
+A frontend-only Indian travel planner built with React, TypeScript, TanStack Start/Router, Vite and Tailwind CSS v4. TanStack Router is the supported platform router (rather than React Router).
 
-## Build with Lovable
+## Run
+`bun install` then `bun run dev`.
 
-Open your project in the [Lovable editor](https://lovable.dev) and keep building.
+## Prototype scope
+No real bookings, login, provider calls or backend storage. All fares, opening hours, routes and rates are sample estimates. Trip and expense data are session-only and reset on refresh. Shared links contain a read-only snapshot of the plan; they are not private. Itineraries export to PDF using jsPDF. Non-Kashmir destinations use generic sample route labels; detailed place guides currently cover Kashmir and Pune.
 
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: connect the project to GitHub and every change made in Lovable is committed straight to your repository.
-- **Full ownership**: this code is yours. Push to your repository and your changes sync back into Lovable, ready for your next prompt.
+## Optional live maps
+Maps work as an illustrative mock without a key. To enable Google Maps, configure the **public browser key** `VITE_GOOGLE_MAPS_API_KEY` in your environment (an uncommitted local `.env` may contain this public key). Enable Maps JavaScript API, billing, and restrict the key to authorized app origins. The Lovable managed browser-key variable is also supported. Never place private server credentials in VITE variables or commit them. No Places, directions or travel-provider data calls are made. Live Maps cannot be verified in the agent sandbox; validate on an authorized deployed origin.
 
-## Development
-
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
-
-```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
-npm run dev
-```
-
-## Built with
-
-- TanStack Start
-- TypeScript
-- React
-- Tailwind CSS
+## Structure
+- `src/data/mockData.ts`: sample destinations, food, stays, places and journey options.
+- `src/services/`: mock integration seams for maps, train, flight, hotel, bus and itinerary services.
+- `src/components/travel/`: reusable search, destination/place cards, daily itinerary, map, budget and shared layout.
+- `src/routes/`: home, planning, results, itinerary, hotels, explore, map, budget, saved trips, help and read-only sharing.
