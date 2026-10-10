@@ -1,0 +1,6 @@
+import { attractions, defaultTrip, hotels, transports, type Trip } from '@/data/mockData';
+export async function generateTripPlan(trip: Trip) { return { trip, routes: await getTransportOptions(trip), hotels: await getHotels(trip), places: attractions }; }
+export async function getTransportOptions(trip: Trip) { const regional = /Srinagar|Kashmir/i.test(trip.to); return transports.map(r=>({...r, route: regional ? [trip.from,...r.route.slice(1)] : [trip.from,...r.route.slice(1,-2),trip.to,'Hotel'],cost:regional?r.cost:Math.round(r.cost*.72)})); }
+export async function getHotels(_trip: Trip) { return hotels; }
+export function getBudget(trip: Trip, routeId: string, hotelId: string) { const route=transports.find(r=>r.id===routeId) || transports[0]; const hotel=hotels.find(h=>h.id===hotelId)||hotels[0]; return [{name:'Transport',cost:route.cost*trip.travelers*2},{name:'Hotels',cost:hotel.cost*Math.max(1,trip.days-1)*Math.ceil(trip.travelers/2)},{name:'Food',cost:450*trip.days*trip.travelers},{name:'Attractions',cost:1800*trip.travelers},{name:'Local travel',cost:1200*trip.days},{name:'Shopping & extras',cost:1500*trip.travelers}]; }
+export function getDefaultTrip() { return {...defaultTrip}; }

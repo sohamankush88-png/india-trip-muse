@@ -1,0 +1,7 @@
+import { createContext, useContext, useState, type ReactNode } from 'react';
+import { defaultTrip, type Trip, type Place } from '@/data/mockData';
+export type Expense={id:number;category:string;amount:number;note:string;day:number};
+type State = {expenses:Expense[];setExpenses:React.Dispatch<React.SetStateAction<Expense[]>>;trip:Trip;setTrip:(trip:Trip)=>void;routeId:string;setRouteId:(id:string)=>void;hotelId:string;setHotelId:(id:string)=>void;saved:Trip[];saveTrip:()=>void;added:{place:Place;day:number}[];addPlace:(place:Place,day:number)=>void};
+const TripContext=createContext<State|undefined>(undefined);
+export function TripProvider({children}:{children:ReactNode}) { const [expenses,setExpenses]=useState<Expense[]>([]);const [trip,setTrip]=useState(defaultTrip);const [routeId,setRouteId]=useState('flight');const [hotelId,setHotelId]=useState('h1');const [saved,setSaved]=useState<Trip[]>([]);const [added,setAdded]=useState<{place:Place;day:number}[]>([]);return <TripContext.Provider value={{expenses,setExpenses,trip,setTrip,routeId,setRouteId,hotelId,setHotelId,saved,saveTrip:()=>setSaved(s=>s.some(t=>JSON.stringify(t)===JSON.stringify(trip))?s:[...s,trip]),added,addPlace:(place,day)=>setAdded(a=>a.some(x=>x.place.id===place.id&&x.day===day)?a:[...a,{place,day}])}}>{children}</TripContext.Provider>;}
+export function useTrip(){const value=useContext(TripContext);if(!value)throw new Error('Trip provider missing');return value;}

@@ -8,3 +8,9 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+## Application architecture
+- Keep navigation in TanStack file routes and shared chrome in the root route; this preserves the platform's SSR and typed routing.
+- Keep mock travel records and service seams separate from UI; this allows future provider integrations without altering page contracts.
+- Keep prototype trip and expense state in session React context, with share snapshots in validated URLs; no backend persistence is implied.
+- Load optional Google Maps and PDF dependencies only in their appropriate browser interactions; missing credentials must not block mock planning.

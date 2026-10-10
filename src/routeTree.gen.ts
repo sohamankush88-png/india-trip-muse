@@ -10,33 +10,167 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as BudgetRouteImport } from './routes/budget'
+import { Route as ExploreRouteImport } from './routes/explore'
+import { Route as HelpRouteImport } from './routes/help'
+import { Route as HotelsRouteImport } from './routes/hotels'
+import { Route as ItineraryRouteImport } from './routes/itinerary'
+import { Route as MapRouteImport } from './routes/map'
+import { Route as MyTripsRouteImport } from './routes/my-trips'
+import { Route as PlanTripRouteImport } from './routes/plan-trip'
+import { Route as SharedItineraryRouteImport } from './routes/shared-itinerary'
+import { Route as TripResultsRouteImport } from './routes/trip-results'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BudgetRoute = BudgetRouteImport.update({
+  id: '/budget',
+  path: '/budget',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ExploreRoute = ExploreRouteImport.update({
+  id: '/explore',
+  path: '/explore',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HelpRoute = HelpRouteImport.update({
+  id: '/help',
+  path: '/help',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HotelsRoute = HotelsRouteImport.update({
+  id: '/hotels',
+  path: '/hotels',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ItineraryRoute = ItineraryRouteImport.update({
+  id: '/itinerary',
+  path: '/itinerary',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MapRoute = MapRouteImport.update({
+  id: '/map',
+  path: '/map',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MyTripsRoute = MyTripsRouteImport.update({
+  id: '/my-trips',
+  path: '/my-trips',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PlanTripRoute = PlanTripRouteImport.update({
+  id: '/plan-trip',
+  path: '/plan-trip',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SharedItineraryRoute = SharedItineraryRouteImport.update({
+  id: '/shared-itinerary',
+  path: '/shared-itinerary',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TripResultsRoute = TripResultsRouteImport.update({
+  id: '/trip-results',
+  path: '/trip-results',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/budget': typeof BudgetRoute
+  '/explore': typeof ExploreRoute
+  '/help': typeof HelpRoute
+  '/hotels': typeof HotelsRoute
+  '/itinerary': typeof ItineraryRoute
+  '/map': typeof MapRoute
+  '/my-trips': typeof MyTripsRoute
+  '/plan-trip': typeof PlanTripRoute
+  '/shared-itinerary': typeof SharedItineraryRoute
+  '/trip-results': typeof TripResultsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/budget': typeof BudgetRoute
+  '/explore': typeof ExploreRoute
+  '/help': typeof HelpRoute
+  '/hotels': typeof HotelsRoute
+  '/itinerary': typeof ItineraryRoute
+  '/map': typeof MapRoute
+  '/my-trips': typeof MyTripsRoute
+  '/plan-trip': typeof PlanTripRoute
+  '/shared-itinerary': typeof SharedItineraryRoute
+  '/trip-results': typeof TripResultsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/budget': typeof BudgetRoute
+  '/explore': typeof ExploreRoute
+  '/help': typeof HelpRoute
+  '/hotels': typeof HotelsRoute
+  '/itinerary': typeof ItineraryRoute
+  '/map': typeof MapRoute
+  '/my-trips': typeof MyTripsRoute
+  '/plan-trip': typeof PlanTripRoute
+  '/shared-itinerary': typeof SharedItineraryRoute
+  '/trip-results': typeof TripResultsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/budget'
+    | '/explore'
+    | '/help'
+    | '/hotels'
+    | '/itinerary'
+    | '/map'
+    | '/my-trips'
+    | '/plan-trip'
+    | '/shared-itinerary'
+    | '/trip-results'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/budget'
+    | '/explore'
+    | '/help'
+    | '/hotels'
+    | '/itinerary'
+    | '/map'
+    | '/my-trips'
+    | '/plan-trip'
+    | '/shared-itinerary'
+    | '/trip-results'
+  id:
+    | '__root__'
+    | '/'
+    | '/budget'
+    | '/explore'
+    | '/help'
+    | '/hotels'
+    | '/itinerary'
+    | '/map'
+    | '/my-trips'
+    | '/plan-trip'
+    | '/shared-itinerary'
+    | '/trip-results'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BudgetRoute: typeof BudgetRoute
+  ExploreRoute: typeof ExploreRoute
+  HelpRoute: typeof HelpRoute
+  HotelsRoute: typeof HotelsRoute
+  ItineraryRoute: typeof ItineraryRoute
+  MapRoute: typeof MapRoute
+  MyTripsRoute: typeof MyTripsRoute
+  PlanTripRoute: typeof PlanTripRoute
+  SharedItineraryRoute: typeof SharedItineraryRoute
+  TripResultsRoute: typeof TripResultsRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +182,91 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/budget': {
+      id: '/budget'
+      path: '/budget'
+      fullPath: '/budget'
+      preLoaderRoute: typeof BudgetRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/explore': {
+      id: '/explore'
+      path: '/explore'
+      fullPath: '/explore'
+      preLoaderRoute: typeof ExploreRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/help': {
+      id: '/help'
+      path: '/help'
+      fullPath: '/help'
+      preLoaderRoute: typeof HelpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/hotels': {
+      id: '/hotels'
+      path: '/hotels'
+      fullPath: '/hotels'
+      preLoaderRoute: typeof HotelsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/itinerary': {
+      id: '/itinerary'
+      path: '/itinerary'
+      fullPath: '/itinerary'
+      preLoaderRoute: typeof ItineraryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/map': {
+      id: '/map'
+      path: '/map'
+      fullPath: '/map'
+      preLoaderRoute: typeof MapRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/my-trips': {
+      id: '/my-trips'
+      path: '/my-trips'
+      fullPath: '/my-trips'
+      preLoaderRoute: typeof MyTripsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/plan-trip': {
+      id: '/plan-trip'
+      path: '/plan-trip'
+      fullPath: '/plan-trip'
+      preLoaderRoute: typeof PlanTripRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/shared-itinerary': {
+      id: '/shared-itinerary'
+      path: '/shared-itinerary'
+      fullPath: '/shared-itinerary'
+      preLoaderRoute: typeof SharedItineraryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/trip-results': {
+      id: '/trip-results'
+      path: '/trip-results'
+      fullPath: '/trip-results'
+      preLoaderRoute: typeof TripResultsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BudgetRoute: BudgetRoute,
+  ExploreRoute: ExploreRoute,
+  HelpRoute: HelpRoute,
+  HotelsRoute: HotelsRoute,
+  ItineraryRoute: ItineraryRoute,
+  MapRoute: MapRoute,
+  MyTripsRoute: MyTripsRoute,
+  PlanTripRoute: PlanTripRoute,
+  SharedItineraryRoute: SharedItineraryRoute,
+  TripResultsRoute: TripResultsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
