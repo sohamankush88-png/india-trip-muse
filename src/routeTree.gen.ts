@@ -18,6 +18,7 @@ import { Route as ItineraryRouteImport } from './routes/itinerary'
 import { Route as MapRouteImport } from './routes/map'
 import { Route as MyTripsRouteImport } from './routes/my-trips'
 import { Route as PlanTripRouteImport } from './routes/plan-trip'
+import { Route as SharedItineraryRouteImport } from './routes/shared-itinerary'
 import { Route as TripResultsRouteImport } from './routes/trip-results'
 
 const IndexRoute = IndexRouteImport.update({
@@ -65,6 +66,11 @@ const PlanTripRoute = PlanTripRouteImport.update({
   path: '/plan-trip',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SharedItineraryRoute = SharedItineraryRouteImport.update({
+  id: '/shared-itinerary',
+  path: '/shared-itinerary',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TripResultsRoute = TripResultsRouteImport.update({
   id: '/trip-results',
   path: '/trip-results',
@@ -81,6 +87,7 @@ export interface FileRoutesByFullPath {
   '/map': typeof MapRoute
   '/my-trips': typeof MyTripsRoute
   '/plan-trip': typeof PlanTripRoute
+  '/shared-itinerary': typeof SharedItineraryRoute
   '/trip-results': typeof TripResultsRoute
 }
 export interface FileRoutesByTo {
@@ -93,6 +100,7 @@ export interface FileRoutesByTo {
   '/map': typeof MapRoute
   '/my-trips': typeof MyTripsRoute
   '/plan-trip': typeof PlanTripRoute
+  '/shared-itinerary': typeof SharedItineraryRoute
   '/trip-results': typeof TripResultsRoute
 }
 export interface FileRoutesById {
@@ -106,6 +114,7 @@ export interface FileRoutesById {
   '/map': typeof MapRoute
   '/my-trips': typeof MyTripsRoute
   '/plan-trip': typeof PlanTripRoute
+  '/shared-itinerary': typeof SharedItineraryRoute
   '/trip-results': typeof TripResultsRoute
 }
 export interface FileRouteTypes {
@@ -120,6 +129,7 @@ export interface FileRouteTypes {
     | '/map'
     | '/my-trips'
     | '/plan-trip'
+    | '/shared-itinerary'
     | '/trip-results'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -132,6 +142,7 @@ export interface FileRouteTypes {
     | '/map'
     | '/my-trips'
     | '/plan-trip'
+    | '/shared-itinerary'
     | '/trip-results'
   id:
     | '__root__'
@@ -144,6 +155,7 @@ export interface FileRouteTypes {
     | '/map'
     | '/my-trips'
     | '/plan-trip'
+    | '/shared-itinerary'
     | '/trip-results'
   fileRoutesById: FileRoutesById
 }
@@ -157,6 +169,7 @@ export interface RootRouteChildren {
   MapRoute: typeof MapRoute
   MyTripsRoute: typeof MyTripsRoute
   PlanTripRoute: typeof PlanTripRoute
+  SharedItineraryRoute: typeof SharedItineraryRoute
   TripResultsRoute: typeof TripResultsRoute
 }
 
@@ -225,6 +238,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PlanTripRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/shared-itinerary': {
+      id: '/shared-itinerary'
+      path: '/shared-itinerary'
+      fullPath: '/shared-itinerary'
+      preLoaderRoute: typeof SharedItineraryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/trip-results': {
       id: '/trip-results'
       path: '/trip-results'
@@ -245,6 +265,7 @@ const rootRouteChildren: RootRouteChildren = {
   MapRoute: MapRoute,
   MyTripsRoute: MyTripsRoute,
   PlanTripRoute: PlanTripRoute,
+  SharedItineraryRoute: SharedItineraryRoute,
   TripResultsRoute: TripResultsRoute,
 }
 export const routeTree = rootRouteImport
