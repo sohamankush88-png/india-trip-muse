@@ -12,6 +12,7 @@ import { useEffect, type ReactNode } from "react";
 
 import { Navbar, Footer } from '@/components/travel/Shared';
 import { TripProvider } from '@/components/travel/TripContext';
+import { ChatWidget } from '@/components/travel/ChatWidget';
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 
@@ -124,7 +125,7 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <TripProvider><Navbar /><Outlet /><Footer /></TripProvider>
+      <TripProvider><Navbar /><Outlet /><Footer /><ChatWidget /></TripProvider>
     </QueryClientProvider>
   );
 }
