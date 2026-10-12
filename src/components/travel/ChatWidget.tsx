@@ -36,7 +36,7 @@ export function ChatWidget() {
       const reader = res.body.getReader(); const dec = new TextDecoder(); let reply = '';
       setMsgs(m => [...m, { role: 'assistant', content: '' }]);
       for (;;) { const { done, value } = await reader.read(); if (done) break; reply += dec.decode(value, { stream: true }); setMsgs(m => [...m.slice(0, -1), { role: 'assistant', content: reply }]); }
-    } catch (e) { setError(e instanceof Error ? e.message : 'The assistant could not reply.'); setMsgs(m => m[m.length - 1]?.role === 'assistant' && !m[m.length - 1].content ? m.slice(0, -1) : m); }
+    } catch (e) { setError(e instanceof Error ? e.message : 'The assistant could not reply.'); setMsgs(m => m[m.length - 1]?.role === 'assistant' && !m[m.length - 1]?.content ? m.slice(0, -1) : m); }
     finally { setBusy(false); }
   }
 
