@@ -20,6 +20,7 @@ import { Route as MyTripsRouteImport } from './routes/my-trips'
 import { Route as PlanTripRouteImport } from './routes/plan-trip'
 import { Route as SharedItineraryRouteImport } from './routes/shared-itinerary'
 import { Route as TripResultsRouteImport } from './routes/trip-results'
+import { Route as ApiChatRouteImport } from './routes/api/chat'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -76,6 +77,11 @@ const TripResultsRoute = TripResultsRouteImport.update({
   path: '/trip-results',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiChatRoute = ApiChatRouteImport.update({
+  id: '/api/chat',
+  path: '/api/chat',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -89,6 +95,7 @@ export interface FileRoutesByFullPath {
   '/plan-trip': typeof PlanTripRoute
   '/shared-itinerary': typeof SharedItineraryRoute
   '/trip-results': typeof TripResultsRoute
+  '/api/chat': typeof ApiChatRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -102,6 +109,7 @@ export interface FileRoutesByTo {
   '/plan-trip': typeof PlanTripRoute
   '/shared-itinerary': typeof SharedItineraryRoute
   '/trip-results': typeof TripResultsRoute
+  '/api/chat': typeof ApiChatRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -116,6 +124,7 @@ export interface FileRoutesById {
   '/plan-trip': typeof PlanTripRoute
   '/shared-itinerary': typeof SharedItineraryRoute
   '/trip-results': typeof TripResultsRoute
+  '/api/chat': typeof ApiChatRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -131,6 +140,7 @@ export interface FileRouteTypes {
     | '/plan-trip'
     | '/shared-itinerary'
     | '/trip-results'
+    | '/api/chat'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -144,6 +154,7 @@ export interface FileRouteTypes {
     | '/plan-trip'
     | '/shared-itinerary'
     | '/trip-results'
+    | '/api/chat'
   id:
     | '__root__'
     | '/'
@@ -157,6 +168,7 @@ export interface FileRouteTypes {
     | '/plan-trip'
     | '/shared-itinerary'
     | '/trip-results'
+    | '/api/chat'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -171,6 +183,7 @@ export interface RootRouteChildren {
   PlanTripRoute: typeof PlanTripRoute
   SharedItineraryRoute: typeof SharedItineraryRoute
   TripResultsRoute: typeof TripResultsRoute
+  ApiChatRoute: typeof ApiChatRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -252,6 +265,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TripResultsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/chat': {
+      id: '/api/chat'
+      path: '/api/chat'
+      fullPath: '/api/chat'
+      preLoaderRoute: typeof ApiChatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -267,6 +287,7 @@ const rootRouteChildren: RootRouteChildren = {
   PlanTripRoute: PlanTripRoute,
   SharedItineraryRoute: SharedItineraryRoute,
   TripResultsRoute: TripResultsRoute,
+  ApiChatRoute: ApiChatRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
