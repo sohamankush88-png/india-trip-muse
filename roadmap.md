@@ -6,3 +6,5 @@
 - [x] Add stop-by-stop travel-time and transport comparisons.
 - [x] Add read-only share links and PDF export.
 - [x] Verify trip workflows and desktop/mobile layouts.
+- [x] AI chatbot + ConfirmTkt Book Tickets
+- [ ] Switch AI to Lovable AI; remove GEMINIAPIKEY
