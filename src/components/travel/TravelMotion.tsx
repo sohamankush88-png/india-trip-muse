@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type ReactNode } from 'react';
+import { useEffect, useRef, useState, type ReactNode, type RefObject } from 'react';
 import { AnimatePresence, animate, motion, useReducedMotion } from 'framer-motion';
 import { useLocation } from '@tanstack/react-router';
 import { Compass } from 'lucide-react';
@@ -7,10 +7,10 @@ import { claimSplashSession, SPLASH_DURATION_MS } from './motionSession';
 const ease = [0.16, 1, 0.3, 1] as const;
 const cards = '.destination-card,.place-card,.transport-card,.day-card,.saved-trip,.guide-item';
 const sections = '.section-heading,.page-heading,.trust-strip,.how-section,.inspiration-band,.journey-section,.budget-summary,.budget-breakdown,.expense-section,.planning-inspiration';
-const details = '.hero-eyebrow,.hero-content h1,.hero-content>p,.hero-proof,.search-field,.step,.activity,.journey-stop';
+const details = '.map-marker,.hero-eyebrow,.hero-content h1,.hero-content>p,.hero-proof,.search-field,.step,.activity,.journey-stop';
 
 /** Animate existing elements in place, without changing their layout or contracts. */
-function useTravelEntrances(scope: React.RefObject<HTMLDivElement | null>, path: string) {
+function useTravelEntrances(scope: RefObject<HTMLDivElement | null>, path: string) {
   const reduced = useReducedMotion();
   useEffect(() => {
     const root = scope.current;
@@ -24,7 +24,7 @@ function useTravelEntrances(scope: React.RefObject<HTMLDivElement | null>, path:
         observer.unobserve(element);
         const index = Array.from(element.parentElement?.children ?? []).indexOf(element);
         const isCard = element.matches(cards);
-        const control = animate(element, { opacity: [0, 1], y: [isCard ? 24 : 16, 0] }, {
+        const control = animate(element, { opacity: [0, 1], y: [element.matches('.map-marker') ? -12 : isCard ? 24 : 16, 0] }, {
           duration: 0.45, delay: Math.min(Math.max(index, 0), 6) * 0.08, ease,
           onComplete: () => { element.style.removeProperty('transform'); element.style.removeProperty('opacity'); running.delete(element); },
         });

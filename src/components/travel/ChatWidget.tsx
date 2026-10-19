@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import ReactMarkdown from 'react-markdown';
 import { MessageCircle, Send, Trash2, X, Compass } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -10,6 +11,7 @@ const chips = ['Plan my day-wise itinerary', 'Cheapest way to reach?', 'Best loc
 
 export function ChatWidget() {
   const { trip, routeId } = useTrip();
+  const reduced = useReducedMotion();
   const [open, setOpen] = useState(false);
   const [lang, setLang] = useState<'English' | 'Hindi' | 'Marathi'>('English');
   const [msgs, setMsgs] = useState<Msg[]>([]);
@@ -41,24 +43,24 @@ export function ChatWidget() {
   }
 
   return <>
-    {open && <section className="chat-popup" role="dialog" aria-label="YatraGenie travel assistant">
+    <AnimatePresence>{open && <motion.section initial={{ opacity: 0, scale: reduced ? 1 : 0.96, y: reduced ? 0 : 12 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: reduced ? 1 : 0.96 }} transition={{ duration: reduced ? 0 : 0.2 }} className="chat-popup" role="dialog" aria-label="YatraGenie travel assistant">
       <header className="chat-head"><span className="brand-icon"><Compass size={18} /></span><div><strong>YatraGenie Assistant</strong><small>{trip.from} → {trip.to}</small></div>
         <select aria-label="Chat language" value={lang} onChange={e => setLang(e.target.value as typeof lang)}><option>English</option><option>Hindi</option><option>Marathi</option></select>
         <Button size="icon" variant="ghost" aria-label="Clear chat" onClick={() => { setMsgs([]); setError(''); }} disabled={busy}><Trash2 /></Button>
         <Button size="icon" variant="ghost" aria-label="Close chat" onClick={() => setOpen(false)}><X /></Button></header>
       <div className="chat-body">
         {!msgs.length && <p className="chat-empty">Namaste! Ask me anything about your trip to {trip.to}.</p>}
-        {msgs.map((m, i) => <div key={i} className={'chat-msg ' + m.role}>{m.role === 'assistant' ? <ReactMarkdown>{m.content}</ReactMarkdown> : m.content}</div>)}
-        {busy && msgs[msgs.length - 1]?.role === 'user' && <div className="chat-msg assistant typing" aria-label="Assistant is typing"><span /><span /><span /></div>}
+        {msgs.map((m, i) => <motion.div key={i} initial={{ opacity: 0, y: reduced ? 0 : 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: reduced ? 0 : 0.2 }} className={'chat-msg ' + m.role}>{m.role === 'assistant' ? <ReactMarkdown>{m.content}</ReactMarkdown> : m.content}</motion.div>)}
+        {busy && msgs[msgs.length - 1]?.role === 'user' && <div className="chat-msg assistant typing" aria-label="Assistant is typing">{[0, 1, 2].map(i => <motion.span key={i} animate={reduced ? undefined : { y: [0, -4, 0], opacity: [0.5, 1, 0.5] }} transition={{ duration: 0.8, repeat: Infinity, delay: i * 0.15 }}/>)}</div>}
         {error && <p className="chat-error">{error}</p>}
         <div ref={endRef} />
       </div>
-      <div className="chat-chips">{chips.map(c => <button key={c} type="button" disabled={busy} onClick={() => send(c)}>{c}</button>)}</div>
+      <div className="chat-chips">{chips.map((c, i) => <motion.div key={c} initial={{ opacity: 0, y: reduced ? 0 : 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: reduced ? 0 : 0.2, delay: reduced ? 0 : i * 0.08 }}><Button variant="outline" type="button" disabled={busy} onClick={() => send(c)}>{c}</Button></motion.div>)}</div>
       <form className="chat-input" onSubmit={e => { e.preventDefault(); send(input); }}>
         <textarea ref={inputRef} aria-label="Message" rows={1} maxLength={2000} value={input} placeholder="Ask about trains, hotels, food…" onChange={e => setInput(e.target.value)} onKeyDown={e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); send(input); } }} />
         <Button size="icon" type="submit" aria-label="Send" disabled={busy || !input.trim()}><Send /></Button>
       </form>
-    </section>}
+    </motion.section>}</AnimatePresence>
     <Button className="chat-fab" size="icon" aria-label={open ? 'Close travel assistant' : 'Open travel assistant'} onClick={() => setOpen(!open)}>{open ? <X /> : <MessageCircle />}</Button>
   </>;
 }

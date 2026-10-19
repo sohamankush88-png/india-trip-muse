@@ -1,4 +1,5 @@
 import * as React from "react";
+import { motion, useReducedMotion } from "framer-motion";
 import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
 
@@ -36,11 +37,15 @@ export interface ButtonProps
   asChild?: boolean;
 }
 
+const MotionButton = motion.create("button");
+const MotionSlot = motion.create(Slot);
+
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, asChild = false, ...props }, ref) => {
-    const Comp = asChild ? Slot : "button";
+    const reduced = useReducedMotion();
+    const Comp = asChild ? MotionSlot : MotionButton;
     return (
-      <Comp className={cn(buttonVariants({ variant, size, className }))} ref={ref} {...props} />
+      <Comp className={cn(buttonVariants({ variant, size, className }), (!variant || variant === "default") && "travel-primary-button")} ref={ref} whileTap={reduced || props.disabled ? undefined : { scale: 0.97 }} transition={{ type: "spring", stiffness: 500, damping: 35 }} {...props} />
     );
   },
 );
