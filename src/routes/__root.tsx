@@ -13,6 +13,8 @@ import { useEffect, type ReactNode } from "react";
 import { Navbar, Footer } from '@/components/travel/Shared';
 import { TripProvider } from '@/components/travel/TripContext';
 import { ChatWidget } from '@/components/travel/ChatWidget';
+import { MotionConfig } from 'framer-motion';
+import { TravelPageMotion, TravelSplash } from '@/components/travel/TravelMotion';
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 
@@ -125,7 +127,7 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <TripProvider><Navbar /><Outlet /><Footer /><ChatWidget /></TripProvider>
+      <MotionConfig reducedMotion="user"><TripProvider><Navbar /><TravelPageMotion><Outlet /></TravelPageMotion><Footer /><ChatWidget /><TravelSplash /></TripProvider></MotionConfig>
     </QueryClientProvider>
   );
 }
