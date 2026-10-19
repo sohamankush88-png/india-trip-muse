@@ -1,5 +1,5 @@
 import * as React from "react";
-import { motion, useReducedMotion, type HTMLMotionProps } from "framer-motion";
+import { animate, useReducedMotion } from "framer-motion";
 import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
 
@@ -33,19 +33,24 @@ const buttonVariants = cva(
 );
 
 export interface ButtonProps
-  extends HTMLMotionProps<'button'>, VariantProps<typeof buttonVariants> {
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof buttonVariants> {
   asChild?: boolean;
 }
-
-const MotionButton = motion.create("button");
-const MotionSlot = motion.create(Slot);
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, asChild = false, ...props }, ref) => {
     const reduced = useReducedMotion();
-    const Comp = asChild ? MotionSlot : MotionButton;
+    const Comp = asChild ? Slot : "button";
     return (
-      <Comp className={cn(buttonVariants({ variant, size, className }), (!variant || variant === "default") && "travel-primary-button")} ref={ref} whileTap={reduced || props.disabled ? {} : { scale: 0.97 }} transition={{ type: "spring", stiffness: 500, damping: 35 }} {...props} />
+      <Comp className={cn(buttonVariants({ variant, size, className }), (!variant || variant === "default") && "travel-primary-button")} ref={ref} {...props} onPointerDown={event => {
+        props.onPointerDown?.(event);
+        if (reduced || props.disabled) return;
+        const element = event.currentTarget;
+        animate(element, { scale: 0.97 }, { duration: 0.08 }).then(() => {
+          if (!element.isConnected) return;
+          animate(element, { scale: 1 }, { type: 'spring', stiffness: 500, damping: 35, onComplete: () => element.style.removeProperty('transform') });
+        });
+      }} />
     );
   },
 );
