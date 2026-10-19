@@ -8,3 +8,6 @@
 - [x] Verify trip workflows and desktop/mobile layouts.
 - [x] AI chatbot + ConfirmTkt Book Tickets
 - [x] Switch AI to Lovable AI (GEMINIAPIKEY kept — deletion declined)
+- [ ] Add once-per-session travel splash and route transitions.
+- [ ] Add accessible button, card, section, form, map, itinerary and chat animations.
+- [ ] Verify animations and unchanged workflows on mobile, tablet and desktop.
