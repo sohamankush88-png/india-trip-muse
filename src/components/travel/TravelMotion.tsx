@@ -49,7 +49,7 @@ export function TravelPageMotion({ children }: { children: ReactNode }) {
   const scope = useRef<HTMLDivElement>(null);
   useTravelEntrances(scope, path);
   return <div ref={scope}><AnimatePresence initial={false} mode="wait">
-    <motion.div key={path} className="travel-route" initial={{ opacity: reduced ? 1 : 0, y: reduced ? 0 : 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: reduced ? 1 : 0 }} transition={{ duration: reduced ? 0 : 0.35, ease }}>
+    <motion.div key={path} className="travel-route" initial={{ opacity: reduced ? 1 : 0, y: reduced ? 0 : 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: reduced ? 1 : 0, transition: { duration: reduced ? 0 : 0.12 } }} transition={{ duration: reduced ? 0 : 0.35, ease }}>
       {children}
     </motion.div>
   </AnimatePresence></div>;

@@ -33,7 +33,7 @@ const buttonVariants = cva(
 );
 
 export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof buttonVariants> {
+  extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'onAnimationStart' | 'onDrag' | 'onDragStart' | 'onDragEnd'>, VariantProps<typeof buttonVariants> {
   asChild?: boolean;
 }
 
@@ -45,7 +45,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     const reduced = useReducedMotion();
     const Comp = asChild ? MotionSlot : MotionButton;
     return (
-      <Comp className={cn(buttonVariants({ variant, size, className }), (!variant || variant === "default") && "travel-primary-button")} ref={ref} whileTap={reduced || props.disabled ? undefined : { scale: 0.97 }} transition={{ type: "spring", stiffness: 500, damping: 35 }} {...props} />
+      <Comp className={cn(buttonVariants({ variant, size, className }), (!variant || variant === "default") && "travel-primary-button")} ref={ref} whileTap={reduced || props.disabled ? {} : { scale: 0.97 }} transition={{ type: "spring", stiffness: 500, damping: 35 }} {...props} />
     );
   },
 );

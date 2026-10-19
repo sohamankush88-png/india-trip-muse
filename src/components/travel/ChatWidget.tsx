@@ -51,7 +51,7 @@ export function ChatWidget() {
       <div className="chat-body">
         {!msgs.length && <p className="chat-empty">Namaste! Ask me anything about your trip to {trip.to}.</p>}
         {msgs.map((m, i) => <motion.div key={i} initial={{ opacity: 0, y: reduced ? 0 : 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: reduced ? 0 : 0.2 }} className={'chat-msg ' + m.role}>{m.role === 'assistant' ? <ReactMarkdown>{m.content}</ReactMarkdown> : m.content}</motion.div>)}
-        {busy && msgs[msgs.length - 1]?.role === 'user' && <div className="chat-msg assistant typing" aria-label="Assistant is typing">{[0, 1, 2].map(i => <motion.span key={i} animate={reduced ? undefined : { y: [0, -4, 0], opacity: [0.5, 1, 0.5] }} transition={{ duration: 0.8, repeat: Infinity, delay: i * 0.15 }}/>)}</div>}
+        {busy && msgs[msgs.length - 1]?.role === 'user' && <div className="chat-msg assistant typing" aria-label="Assistant is typing">{[0, 1, 2].map(i => <motion.span key={i} animate={reduced ? {} : { y: [0, -4, 0], opacity: [0.5, 1, 0.5] }} transition={{ duration: 0.8, repeat: Infinity, delay: i * 0.15 }}/>)}</div>}
         {error && <p className="chat-error">{error}</p>}
         <div ref={endRef} />
       </div>
