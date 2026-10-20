@@ -35,7 +35,7 @@ export function JourneyPreview() {
   const finished = !playing && active === legs.length - 1;
   const stops = [legs[0]!.from, ...legs.map(l => l.to)];
   const perPerson = legs.reduce((s, l) => s + l.cost, 0);
-  const choose = (i: number) => { setPlaying(false); setActive(i); };
+  const choose = (i: number) => { started.current = true; setPlaying(false); setActive(i); };
   const replay = () => { started.current = true; setActive(0); setRun(r => r + 1); setPlaying(true); };
   const toggle = () => { if (finished) replay(); else { started.current = true; setPlaying(p => !p); } };
   const move = reduced ? 0 : LEG_MS / 1000;

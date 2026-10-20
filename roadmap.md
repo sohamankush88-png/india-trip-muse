@@ -11,5 +11,5 @@
 - [x] Add once-per-session travel splash and route transitions.
 - [x] Add accessible button, card, section, form, map, itinerary and chat animations.
 - [x] Verify animations and unchanged workflows on mobile, tablet and desktop.
-- [ ] Add animated journey preview highlighting each leg of the selected route.
+- [x] Add animated journey preview highlighting each leg of the selected route.
 - [ ] Add sign-up / login pages with Lovable Cloud and store each user's trip data.
